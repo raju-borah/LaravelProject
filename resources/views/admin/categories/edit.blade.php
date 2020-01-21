@@ -6,23 +6,21 @@
 @section('content')
     <h1>Categories</h1>
     <div class="col-sm-4">
-        {!! Form::model($category,['method'=>'PATCH','action'=>['AdminCategoriesController@Update',$category->id]]) !!}
+        {!! Form::model($category,['method'=>'PATCH','action'=>['AdminCategoriesController@update',$category->id]]) !!}
         <div class="form-group">
             {!! Form::label('name','Name:') !!}
             {!! Form::text('name',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::submit('Edit Category',['class'=>'btn btn-success']) !!}
+            {!! Form::submit('Update Category',['class'=>'btn btn-success col-sm-6']) !!}
         </div>
         {!! Form::close() !!}
-    </div>
-    <div class="col-sm-8">
-        {!! Form::open(['method'=>'DELETE','action'=>'AdminCategoriesController@destory']) !!}
-            <div class="form-group">
-                {!! Form::submit('Delete Category',['class'=>'btn btn-warning']) !!}
-            </div>
-        {!! Form::close() !!}
 
+        {!! Form::open(['method'=>'DELETE','action'=>['AdminCategoriesController@destroy',$category->id]]) !!}
+        <div class="form-group">
+            {!! Form::submit('Delete Category',['class'=>'btn btn-warning col-sm-6']) !!}
+        </div>
+        {!! Form::close() !!}
     </div>
 @stop
 
