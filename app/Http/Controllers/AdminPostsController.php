@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\CommentReply;
 use App\Http\Requests\PostCreateRequest;
 use App\Photo;
 use App\Post;
@@ -45,17 +46,17 @@ class AdminPostsController extends Controller
     public function store(PostCreateRequest $request)
     {
 
-       $user=Auth::user();
-       $input=$request->all();
-       if ($file=$request->file('photo_id')){
-           $name=time().$file->getClientOriginalName();
-           $file->move('images',$name);
-           $photo=Photo::create(['file'=>$name]);
-           $input['photo_id']=$photo->id;
-       }
+        $user=Auth::user();
+        $input=$request->all();
+        if ($file=$request->file('photo_id')){
+            $name=time().$file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo=Photo::create(['file'=>$name]);
+            $input['photo_id']=$photo->id;
+        }
 
-       $user->posts()->create($input);
-       return redirect('/admin/posts');
+        $user->posts()->create($input);
+        return redirect('/admin/posts');
 
     }
 
@@ -119,5 +120,12 @@ class AdminPostsController extends Controller
         $post->delete();
         return redirect('/admin/posts');
 
+    }
+
+    public function post($id){
+        $post=Post::findOrFail($id);
+        $categories=Category::all();
+        $comments=$post->comments()->whereIsActive(1)->get();
+        return view('post',compact('post','categories','comments'));
     }
 }
