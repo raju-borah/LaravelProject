@@ -53,6 +53,9 @@ Route::group(['middleware'=>'admin'],function (){
         'store'=>'admin.media.store'
 
     ]]);
+    Route::delete('/delete/media','AdminMediaController@deleteMedia');
+
+
 //    routes for comment and replies
     Route::resource('/admin/comments','PostCommentsController',['names'=>[
         'index'=>'admin.comments.index',
@@ -62,12 +65,13 @@ Route::group(['middleware'=>'admin'],function (){
 
     ]]);
     Route::resource('/admin/comment/replies','CommentRepliesController',['names'=>[
-        'index'=>'admin.replies.index',
-        'create'=>'admin.replies.create',
-        'store'=>'admin.replies.store',
-        'show'=>'admin.replies.show',
+        'index'=>'admin.comment.replies.index',
+        'create'=>'admin.comment.replies.create',
+        'store'=>'admin.comment.replies.store',
+        'show'=>'admin.comment.replies.show'
 
     ]]);
+
 
 //    Route::get('admin/media/upload',['as'=>'admin.media.upload','uses'=>'AdminMediaController@store']);
 });
