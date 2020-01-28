@@ -11,18 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 //for authentication login and logout
 Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::group(['middleware'=>'admin'],function (){
-    Route::get('/admin', function (){
-        return view('admin.index');
-    });
+    Route::get('/admin', 'AdminController@index');
 
     //for post page
     Route::get('/post/{id}',['as'=>'home.post','uses'=>'AdminPostsController@post']);
