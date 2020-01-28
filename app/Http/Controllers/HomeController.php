@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests;
 use App\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
