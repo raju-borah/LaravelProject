@@ -26,9 +26,7 @@
     <!-- Post Content -->
     <p class="lead">{{$post->body}}</p>
     <hr>
-    @if(Session::has('comment_message'))
-        <p class="bg-success">{{session('comment_message')}}</p>
-    @endif
+    @include('includes.flash_msg')
     <!-- Blog Comments -->
     @if(Auth::check())
         <!-- Comments Form -->
